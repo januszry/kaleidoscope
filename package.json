@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/januszry/kaleidoscope.git"
@@ -17,5 +19,22 @@
   "homepage": "https://github.com/januszry/kaleidoscope#readme",
   "devDependencies": {
     "node-sass": "^4.7.2"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "matter-js": "^0.14.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   }
 }
