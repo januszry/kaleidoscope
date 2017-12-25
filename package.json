@@ -1,0 +1,21 @@
+{
+  "name": "kaleidoscope",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/januszry/kaleidoscope.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/januszry/kaleidoscope/issues"
+  },
+  "homepage": "https://github.com/januszry/kaleidoscope#readme",
+  "devDependencies": {
+    "node-sass": "^4.7.2"
+  }
+}
