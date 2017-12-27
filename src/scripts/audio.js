@@ -1,4 +1,4 @@
-const audioCtx = new AudioContext()
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 const analyser = audioCtx.createAnalyser()
 
 function toHex(i, padding = 2) {
