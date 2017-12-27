@@ -1,10 +1,13 @@
 {
   "name": "kaleidoscope",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
+  "s3_bucket": "kaleidoscope-sim",
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel",
+    "build": "parcel build -d $npm_package_s3_bucket/$npm_package_version --public-url ./$npm_package_version ./index.html",
+    "publish": "aws --profile global s3 cp ./$npm_package_s3_bucket/$npm_package_version/index.html s3://$npm_package_s3_bucket/ --acl public-read && aws --profile global s3 sync ./$npm_package_s3_bucket s3://$npm_package_s3_bucket/ --acl public-read"
   },
   "repository": {
     "type": "git",
