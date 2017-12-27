@@ -1,3 +1,5 @@
+import { dropGem } from './visualize.js'
+
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 const analyser = audioCtx.createAnalyser()
 
@@ -29,11 +31,16 @@ export function analyse(stream) {
     analyser.getByteTimeDomainData(timeDomainDataArray)
     analyser.getByteTimeDomainData
     if (frequencyDataArray.reduce((a, b) => a + b, 0) > 0) {
+      const vol = Math.max(...timeDomainDataArray)
+      const size = (vol - 50) / 4
+      if (size < 0) {
+        return
+      }
       const r = toHex(frequencyDataArray[0])
       const g = toHex(frequencyDataArray[1])
       const b = toHex(frequencyDataArray[2])
-      const vol = Math.max(...timeDomainDataArray)
-      console.log(`#${r}${g}${b}`, vol)
+      console.log(`#${r}${g}${b}`, size)
+      dropGem(`#${r}${g}${b}`, size)
     }
   }
   fetch()
