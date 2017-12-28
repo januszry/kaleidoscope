@@ -11,6 +11,10 @@ function toHex(i, padding = 2) {
   return hex
 }
 
+function sum(arr) {
+  return arr.reduce((a, b) => a + b, 0)
+}
+
 export function analyse(stream) {
   const source = audioCtx.createMediaStreamSource(stream)
   source.connect(analyser)
@@ -20,8 +24,8 @@ export function analyse(stream) {
   analyser.fftSize = 32
 
   // TODO: assumed sample rate to 44100
-  const frequencyDataArray = new Uint8Array(3)  // 44100 / 32 * 3 ~= 4k
-  const timeDomainDataArray = new Uint8Array(32)
+  const frequencyDataArray = new Uint8Array(analyser.frequencyBinCount)  // 44100 / 32 * 3 ~= 4k
+  const timeDomainDataArray = new Uint8Array(analyser.frequencyBinCount)
 
   function fetch() {
     // Schedule next redraw
@@ -29,8 +33,9 @@ export function analyse(stream) {
     // Get spectrum data
     analyser.getByteFrequencyData(frequencyDataArray)
     analyser.getByteTimeDomainData(timeDomainDataArray)
+
     analyser.getByteTimeDomainData
-    if (frequencyDataArray.reduce((a, b) => a + b, 0) > 0) {
+    if (sum(frequencyDataArray) > 0) {
       const vol = Math.max(...timeDomainDataArray)
       const size = (vol - 50) / 4
       if (size < 0) {
