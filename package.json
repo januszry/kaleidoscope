@@ -6,10 +6,10 @@
   "s3_bucket": "kaleidoscope-sim",
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel build -d doc/$npm_package_version --public-url ./$npm_package_version src/index.html && mv doc/$npm_package_version/index.html doc/",
-    "build:full": "parcel build -d doc/$npm_package_version --public-url ./$npm_package_version src/index.html --no-minify && mv doc/$npm_package_version/index.html doc/",
-    "publish": "aws --profile global s3 sync doc s3://$npm_package_s3_bucket/ --acl public-read",
-    "clean": "rm -rf dist doc"
+    "build": "parcel build -d build/$npm_package_version --public-url ./$npm_package_version src/index.html && mv build/$npm_package_version/index.html build/",
+    "build:full": "parcel build -d build/$npm_package_version --public-url ./$npm_package_version src/index.html --no-minify && mv build/$npm_package_version/index.html build/",
+    "publish": "aws --profile global s3 sync build s3://$npm_package_s3_bucket/ --acl public-read",
+    "clean": "rm -rf dist build"
   },
   "repository": {
     "type": "git",
