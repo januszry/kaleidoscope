@@ -11,16 +11,19 @@ const render = Matter.Render.create({
   engine: engine,
   options: {
     wireframes: false,
+    width: 800,
+    height: 800,
+    background: 'transparent',
   },
 })
 
-const wallL = Matter.Bodies.rectangle(300, 300, 400, 5, {
+const wallL = Matter.Bodies.rectangle(300, 400, 400, 5, {
   isStatic: true,
   angle: Math.PI / 3,
   chamfer: { radius: 3 },
   friction: 1,
 })
-const wallR = Matter.Bodies.rectangle(500, 300, 400, 5, {
+const wallR = Matter.Bodies.rectangle(500, 400, 400, 5, {
   isStatic: true,
   angle: Math.PI * 2 / 3,
   chamfer: { radius: 3 },
@@ -35,7 +38,8 @@ Matter.Render.run(render)
 Matter.World.add(engine.world, [wallL, wallR])
 
 export function dropGem(color, size) {
-  const gem = Matter.Bodies.circle(300, 0, size, {
+  const dropPoint = Math.random() * 250 + 275
+  const gem = Matter.Bodies.circle(dropPoint, 0, size, {
     friction: 1,
     render: {
       fillStyle: color,

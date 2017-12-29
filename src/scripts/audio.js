@@ -37,7 +37,7 @@ export function analyse(stream) {
     analyser.getByteTimeDomainData
     if (sum(frequencyDataArray) > 0) {
       const vol = Math.max(...timeDomainDataArray)
-      const size = (vol - 50) / 4
+      const size = (vol - 50) / 8
       if (size < 0) {
         return
       }

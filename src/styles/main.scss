@@ -1,5 +1,15 @@
 body {
-  background: #fafafa;
+  background: white;
+  margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
+}
+
+#playground {
+  width: 800px;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-size: 800px;
+  background-position: center;
 }
