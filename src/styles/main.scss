@@ -1,5 +1,5 @@
 body {
-  background: white;
+  background: #EDECEC;
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
@@ -15,5 +15,15 @@ body {
   .world {
     width: 100%;
     height: 100%;
+  }
+  .crepe {
+    width: 100px;
+    height: 125px;
+    position: fixed;
+    top: 600px;
+    left: 80px;
+    img {
+      width: 100%;
+    }
   }
 }

@@ -21,13 +21,13 @@ function init() {
     },
   })
 
-  const wallL = Matter.Bodies.rectangle(300, 400, 400, 5, {
+  const wallL = Matter.Bodies.rectangle(301, 400, 400, 4, {
     isStatic: true,
     angle: Math.PI / 3,
     chamfer: { radius: 3 },
     friction: 1,
   })
-  const wallR = Matter.Bodies.rectangle(500, 400, 400, 5, {
+  const wallR = Matter.Bodies.rectangle(499, 400, 400, 4, {
     isStatic: true,
     angle: Math.PI * 2 / 3,
     chamfer: { radius: 3 },
