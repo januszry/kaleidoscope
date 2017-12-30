@@ -1,13 +1,13 @@
 import * as Matter from 'matter-js'
 
-const playground = document.getElementById('playground')
+const canvas = document.getElementById('playground-canvas')
 
 // create an engine
 export const engine = Matter.Engine.create()
 
 // create a renderer
 const render = Matter.Render.create({
-  element: playground,
+  element: canvas,
   engine: engine,
   options: {
     wireframes: false,
