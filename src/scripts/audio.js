@@ -1,4 +1,5 @@
-import { dropGem } from './visualize.js'
+import { dropGem } from './visualize'
+import * as store from './store'
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 const analyser = audioCtx.createAnalyser()
@@ -34,7 +35,7 @@ export function analyse(stream) {
     analyser.getByteFrequencyData(f)
     analyser.getByteTimeDomainData(t)
 
-    if (sum(f) > 0) {
+    if (store.status === 'PREPARING' && sum(f) > 0) {
       const vol = Math.max(...t)
       const size = (vol - 50) / 8
       if (size < 0) {
