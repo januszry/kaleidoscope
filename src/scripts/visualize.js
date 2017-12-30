@@ -125,6 +125,18 @@ export function dropGem(color, size) {
 const dstCanvas = document.querySelector('#playground .mirrored-world canvas')
 const dstContext = dstCanvas.getContext('2d')
 
+function _drawWhiteBackground(ctx, dw, dh) {
+  ctx.beginPath()
+  ctx.lineTo(dw / 2, dh)
+  ctx.lineTo(dw, 0)
+  ctx.lineTo(0, 0)
+  ctx.lineWidth = 1
+  ctx.fillStyle = 'white'
+  ctx.fill()
+  ctx.strokeStyle = 'white'
+  ctx.stroke()
+}
+
 function _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, ox, oy) {
   const canvas = dstCanvas
   const ctx = dstContext
@@ -133,20 +145,26 @@ function _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, ox, oy) {
   ctx.translate(canvas.width / 2, canvas.height / 2)
   ctx.translate(ox, oy)
 
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
 
   ctx.scale(-1, 1)
   ctx.rotate(60 * Math.PI / 180)
 
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
+  _drawWhiteBackground(ctx, dw, dh)
   ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
   ctx.rotate(120 * Math.PI / 180)
 
