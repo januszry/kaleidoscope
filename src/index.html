@@ -4,20 +4,44 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kaleidoscope</title>
+    <link rel="shortcut icon" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
     <link rel="stylesheet" href="styles/main.scss">
-    
+    <title>Kaleidoscope Simulator</title>
+
   </head>
   <body>
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>Sass</li>
-      </ul>
+    <div id="wrapper">
+      <div id="playground">
+        <div class="world"></div>
+        <div class="mirrored-world">
+          <canvas class="mirrored-canvas" width="800" height="800"></canvas>
+        </div>
+      </div>
+
+      <img id="logo" src="assets/logo.png" alt="logo" />
+      <div id="title">Kaleidoscope</div>
+
+      <div id="crepe">
+        <img src="assets/crepe.png" alt="crepe">
+      </div>
+
+      <div id="buttons">
+        <div class="play-button control-buttons">
+          <div class="button-overlay"></div>
+        </div>
+        <div class="redo-button control-buttons">
+          <div class="button-overlay"></div>
+        </div>
+      </div>
+
+      <div id="mask"></div>
+
+      <div id="copyrights">
+        2017© Created by Xuefei Zhang &amp; Ruoyu Zeng. Dedicated to Ms.Crepe.
+      </div>
     </div>
-    
+
     <script src="scripts/main.js"></script>
   </body>
 </html>

@@ -1,41 +1,49 @@
-const audioCtx = new AudioContext()
-const analyser = audioCtx.createAnalyser()
+import * as audio from './audio'
+import * as visualize from './visualize'
+import * as store from './store'
 
-function toHex(i, padding = 2) {
-    let hex = Number(i).toString(16)
-    while (hex.length < padding) {
-        hex = '0' + hex
-    }
-    return hex
+navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+  .then(audio.analyse)
+
+const playButton = document.querySelector('.play-button')
+const redoButton = document.querySelector('.redo-button')
+const wrapper = document.getElementById('wrapper')
+const crepe = document.getElementById('crepe')
+const title = document.getElementById('title')
+const world = document.querySelector('#playground .world')
+const mirroredWorld = document.querySelector('#playground .mirrored-world')
+const readyButton = document.querySelector('.play-button')
+
+function prepare() {
+  store.status = 'PREPARING'
+  store.gemCount = 0
+
+  visualize.init()
+
+  wrapper.classList.remove('playing')
+  readyButton.classList.remove('ready')
+
+  const mirrorCanvas = mirroredWorld.querySelector('canvas')
+  const mirrorContext = mirrorCanvas.getContext('2d')
+  mirrorContext.clearRect(0, 0, mirrorCanvas.width, mirrorCanvas.height)
 }
 
-navigator.mediaDevices.getUserMedia({ audio: true, video: false})
-    .then(stream => {
-        const source = audioCtx.createMediaStreamSource(stream)
-        source.connect(analyser)
+function play() {
+  if (store.status === 'PLAYING') {
+    return
+  }
+  store.status = 'PLAYING'
 
-        analyser.minDecibels = -40
-        analyser.maxDecibels = -10
-        analyser.fftSize = 32
+  visualize.closeContainer()
 
-        // TODO: assumed sample rate to 44100
-        const frequencyDataArray = new Uint8Array(3)  // 44100 / 32 * 3 ~= 4k
-        const timeDomainDataArray = new Uint8Array(32)
+  wrapper.classList.add('playing')
+  readyButton.classList.remove('ready')
 
-        function fetch() {
-            // Schedule next redraw
-            requestAnimationFrame(fetch)
-            // Get spectrum data
-            analyser.getByteFrequencyData(frequencyDataArray)
-            analyser.getByteTimeDomainData(timeDomainDataArray)
-            analyser.getByteTimeDomainData
-            if (frequencyDataArray.reduce((a, b) => a + b, 0) > 0) {
-                const r = toHex(frequencyDataArray[0])
-                const g = toHex(frequencyDataArray[1])
-                const b = toHex(frequencyDataArray[2])
-                const vol = Math.max(...timeDomainDataArray)
-                console.log(`#${r}${g}${b}`, vol)
-            }
-        }
-        fetch()
-    })
+  visualize.generateKaleidoscope()
+}
+
+prepare()
+
+playButton.onclick = play
+
+redoButton.onclick = prepare
