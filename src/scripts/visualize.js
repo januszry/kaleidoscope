@@ -2,7 +2,8 @@ import * as Matter from 'matter-js'
 
 import imageURL from '../assets/glow-small.png'
 
-const world = document.querySelector('#playground .world')
+const playground = document.getElementById('playground')
+const world = playground.querySelector('.world')
 world.style.backgroundImage = `url(${imageURL})`
 
 // create an engine
@@ -59,4 +60,10 @@ export function dropGem(color, size) {
     },
   })
   Matter.World.add(engine.world, [gem])
+}
+
+export function zoomOut() {
+  const canvas = world.querySelector('canvas')
+  const ctx = canvas.getContext('2d')
+  ctx.scale(0.3, 0.3)
 }

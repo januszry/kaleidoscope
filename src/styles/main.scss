@@ -16,43 +16,46 @@ body {
     width: 100%;
     height: 100%;
   }
-  .crepe {
-    width: 100px;
-    height: 125px;
-    position: fixed;
-    top: 600px;
-    left: 80px;
-    img {
-      width: 100%;
-    }
+}
+
+#crepe {
+  width: 100px;
+  height: 125px;
+  position: fixed;
+  top: 600px;
+  left: 80px;
+  img {
+    width: 100%;
   }
-  .buttons {
-    position: fixed;
-    top: 640px;
-    left: 337px;
-    .control-buttons {
-      display: inline-block;
+}
+
+#buttons {
+  position: fixed;
+  top: 640px;
+  right: 100px;
+  .control-buttons {
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 20px;
+    .button-overlay {
+      width: 100px;
       border-radius: 4px;
-      cursor: pointer;
-      margin: 0 20px;
-      .button-overlay {
-        width: 100px;
-        border-radius: 4px;
-        text-align: center;
-        line-height: 7px;
-        padding: 25px 0;
-        box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-        color: #404040;
-        &:hover {
-          background-color: rgba(0,0,0,0.2);
-        }
+      text-align: center;
+      line-height: 7px;
+      padding: 25px 0;
+      box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+      color: #404040;
+      &:hover {
+        background-color: rgba(0,0,0,0.2);
       }
     }
-    .play-button {
-      background-color: #E4583E;
-    }
-    .redo-button {
-      background-color: #EDECEC;
-    }
+  }
+  .play-button {
+    background-color: #E4583E;
+  }
+  .redo-button {
+    background-color: #EDECEC;
+    display: none;
   }
 }
