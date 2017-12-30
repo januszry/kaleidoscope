@@ -40,7 +40,7 @@ function play() {
   world.style.backgroundImage = 'none'
   wrapper.classList.add('playing')
 
-  visualize.generate()
+  visualize.generateKaleidoscope()
 }
 
 prepare()

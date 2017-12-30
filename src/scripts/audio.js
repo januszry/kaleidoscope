@@ -37,7 +37,7 @@ export function analyse(stream) {
 
     if (store.status === 'PREPARING' && sum(f) > 0) {
       const vol = Math.max(...t)
-      const size = (vol - 50) / 8
+      const size = (vol - 50) / 4
       if (size < 0) {
         return
       }

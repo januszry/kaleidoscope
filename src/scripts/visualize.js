@@ -73,14 +73,48 @@ export function closeContainer() {
   return Matter.World.add(engine.world, [wallU])
 }
 
-export function dropGem(color, size) {
-  const dropPoint = Math.random() * 250 + 275
-  const gem = Matter.Bodies.circle(dropPoint, 0, size, {
+const gemFactories = [
+  // circle
+  (dropPoint, size, color) => Matter.Bodies.circle(dropPoint, 0, size, {
     friction: 1,
     render: {
       fillStyle: color,
     },
-  })
+  }),
+  // triangle
+  (dropPoint, size, color) => Matter.Bodies.polygon(dropPoint, 0, 3, size, {
+    friction: 1,
+    chamfer: { radius: 3 },
+    render: {
+      fillStyle: color,
+    },
+  }),
+  // square
+  (dropPoint, size, color) => Matter.Bodies.polygon(dropPoint, 0, 4, size, {
+    render: {
+      fillStyle: color,
+    },
+  }),
+  // pentagon
+  (dropPoint, size, color) => Matter.Bodies.polygon(dropPoint, 0, 5, size, {
+    render: {
+      fillStyle: color,
+    },
+  }),
+  // rectangle
+  (dropPoint, size, color) => Matter.Bodies.rectangle(dropPoint, 0, size, size / 2, {
+    chamfer: { radius: 3 },
+    render: {
+      fillStyle: color,
+    },
+  }),
+]
+
+export function dropGem(color, size) {
+  const dropPoint = Math.random() * 250 + 275
+
+  const factory = gemFactories[Math.floor(Math.random() * gemFactories.length)]
+  const gem = factory(dropPoint, size, color)
   return Matter.World.add(engine.world, [gem])
 }
 
@@ -94,7 +128,7 @@ export function zoomOut() {
 const dstCanvas = document.querySelector('#playground .mirrored-world canvas')
 const dstContext = dstCanvas.getContext('2d')
 
-function _generate(srcCanvas, sw, sh, dw, dh, ox, oy) {
+function _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, ox, oy) {
   const canvas = dstCanvas
   const ctx = dstContext
 
@@ -122,29 +156,29 @@ function _generate(srcCanvas, sw, sh, dw, dh, ox, oy) {
   ctx.setTransform(1, 0, 0, 1, 0, 0)
 }
 
-export function generate() {
+export function generateKaleidoscope() {
   const sw = axes.l
   const sh = axes.l / 2 * Math.sqrt(3)
   const dw = sw / 5
   const dh = sh / 5
   const srcCanvas = world.querySelector('canvas')
-  _generate(srcCanvas, sw, sh, dw, dh, 0, 0)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, 0)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * -3, 0)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh)
-  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, 0, -dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, -dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 3, dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 3, -dh * 2)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh * 3)
-  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh * 3)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh * 3)
-  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh * 3)
-  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * 4)
-  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * -4)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, 0)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 3, 0)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * -3, 0)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, -dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 3, dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 3, -dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 3, dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 3, -dh * 2)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh * 3)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh * 3)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh * 3)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh * 3)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * 4)
+  _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * -4)
 }
