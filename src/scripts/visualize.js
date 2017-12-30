@@ -38,6 +38,7 @@ export function init() {
       isStatic: true,
       angle: Math.PI / 3,
       chamfer: { radius: 3 },
+      stiffness: 1,
       friction: 1,
       render: {
         fillStyle: 'white',
@@ -47,6 +48,7 @@ export function init() {
       isStatic: true,
       angle: Math.PI * 2 / 3,
       chamfer: { radius: 3 },
+      stiffness: 1,
       friction: 1,
       render: {
         fillStyle: 'white',
