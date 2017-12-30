@@ -70,6 +70,7 @@ $canvas-height: 800px;
   left: 50px;
   width: 20px;
   height: 20px;
+  z-index: 9;
 }
 
 #title {
@@ -98,7 +99,9 @@ $canvas-height: 800px;
   height: 800px;
   top: 0;
   background-image: url('../assets/mask.png');
-  background-size: 100%;
+  background-size: 1000px;
+  background-repeat: no-repeat;
+  background-position: center;
   display: none;
 }
 
