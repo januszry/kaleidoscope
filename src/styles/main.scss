@@ -33,6 +33,15 @@ $canvas-height: 800px;
   }
 }
 
+#copyrights {
+  position: absolute;
+  width: 100%;
+  bottom: 30px;
+  text-align: center;
+  color: #808080;
+  font-size: 12px;
+}
+
 #playground {
   width: $canvas-width;
   height: $canvas-height;
