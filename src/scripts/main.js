@@ -12,13 +12,16 @@ const crepe = document.getElementById('crepe')
 const title = document.getElementById('title')
 const world = document.querySelector('#playground .world')
 const mirroredWorld = document.querySelector('#playground .mirrored-world')
+const readyButton = document.querySelector('.play-button')
 
 function prepare() {
   store.status = 'PREPARING'
+  store.gemCount = 0
 
   visualize.init()
 
   wrapper.classList.remove('playing')
+  readyButton.classList.remove('ready')
 
   const mirrorCanvas = mirroredWorld.querySelector('canvas')
   const mirrorContext = mirrorCanvas.getContext('2d')
@@ -32,9 +35,9 @@ function play() {
   store.status = 'PLAYING'
 
   visualize.closeContainer()
-  visualize.zoomOut()
 
   wrapper.classList.add('playing')
+  readyButton.classList.remove('ready')
 
   visualize.generateKaleidoscope()
 }

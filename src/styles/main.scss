@@ -112,6 +112,10 @@ $canvas-height: 800px;
   }
   .play-button {
     background-image: url('../assets/button-play.png');
+    display: none;
+    &.ready {
+      display: inherit;
+    }
   }
   .redo-button {
     background-image: url('../assets/button-redo.png');

@@ -15,8 +15,9 @@ export const axes = {
 
 export function init() {
   // clear
-  for (const c of world.querySelectorAll('canvas')) {
-    c.remove()
+  const canvas = world.querySelector('canvas')
+  if (canvas) {
+    canvas.remove()
   }
   Matter.World.clear(engine.world)
   Matter.Engine.clear(engine)
@@ -70,7 +71,6 @@ export function init() {
   Matter.World.add(engine.world, mouseConstraint)
   render.mouse = mouse
 }
-init()
 
 export function closeContainer() {
   const wallU = Matter.Bodies.rectangle(
@@ -121,13 +121,6 @@ export function dropGem(color, size) {
   const gem = factory(dropPoint, size, color)
   return Matter.World.add(engine.world, [gem])
 }
-
-export function zoomOut() {
-  const canvas = world.querySelector('canvas')
-  const ctx = canvas.getContext('2d')
-  ctx.scale(0.3, 0.3)
-}
-
 
 const dstCanvas = document.querySelector('#playground .mirrored-world canvas')
 const dstContext = dstCanvas.getContext('2d')

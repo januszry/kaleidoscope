@@ -3,6 +3,7 @@ import * as store from './store'
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 const analyser = audioCtx.createAnalyser()
+const readyButton = document.querySelector('.play-button')
 
 function toHex(i, padding = 2) {
   let hex = Number(i).toString(16)
@@ -31,6 +32,9 @@ export function analyse(stream) {
   function fetch() {
     // Schedule next redraw
     requestAnimationFrame(fetch)
+    if (store.status !== 'PREPARING') {
+      return
+    }
     // Get spectrum data
     analyser.getByteFrequencyData(f)
     analyser.getByteTimeDomainData(t)
@@ -43,8 +47,11 @@ export function analyse(stream) {
       }
       const hsl = 360 * (f[0] / 256 / 256 + f[1] / 256 + f[2])
       const a = Math.random() * 0.3 + 0.5
-      console.log(hsl, size)
       dropGem(`hsla(${hsl}, 100%, 50%, ${a})`, size)
+      store.gemCount++
+      if (store.gemCount > 20) {
+        readyButton.classList.add('ready')
+      }
     }
   }
   fetch()
