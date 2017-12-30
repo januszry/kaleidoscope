@@ -7,7 +7,7 @@ const engine = Matter.Engine.create()
 
 export const axes = {
   sx: 200,
-  sy: 300,
+  sy: 200,
   l: 400,
   w: 800,
   h: 800,

@@ -7,6 +7,10 @@ body {
 $canvas-width: 800px;
 $canvas-height: 800px;
 
+#wrapper {
+  height: 100vh;
+}
+
 #playground {
   width: $canvas-width;
   height: $canvas-height;
@@ -38,7 +42,7 @@ $canvas-height: 800px;
   width: 100px;
   height: 125px;
   position: absolute;
-  top: 600px;
+  bottom: 100px;
   left: 80px;
   img {
     width: 100%;
@@ -50,7 +54,7 @@ $canvas-height: 800px;
 
 #buttons {
   position: absolute;
-  top: 640px;
+  bottom: 120px;
   right: 80px;
   .control-buttons {
     display: inline-block;
