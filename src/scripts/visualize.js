@@ -8,7 +8,15 @@ world.style.backgroundImage = `url(${imageURL})`
 // create an engine
 const engine = Matter.Engine.create()
 
-function init() {
+export function clearAll() {
+  for (const c of world.querySelectorAll('canvas')) {
+    c.remove()
+  }
+  Matter.World.clear(engine.world)
+  Matter.Engine.clear(engine)
+}
+
+export function init() {
   // create a renderer
   const render = Matter.Render.create({
     element: world,
