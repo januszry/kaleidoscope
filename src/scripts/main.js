@@ -12,7 +12,4 @@ playButton.onclick = function() {
   console.log('Play!')
 }
 
-redoButton.onclick = function() {
-  visualize.clearAll()
-  visualize.init()
-}
+redoButton.onclick = visualize.init
