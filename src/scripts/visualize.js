@@ -89,3 +89,35 @@ export function zoomOut() {
   const ctx = canvas.getContext('2d')
   ctx.scale(0.3, 0.3)
 }
+
+export function generate() {
+  const sw = axes.l
+  const sh = axes.l / 2 * Math.sqrt(3)
+  const dw = sw / 4
+  const dh = sh / 4
+  const srcCanvas = world.querySelector('canvas')
+  const canvas = document.querySelector('#playground .mirrored-world canvas')
+  const ctx = canvas.getContext('2d')
+
+  ctx.translate(canvas.width / 2, canvas.height / 2)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.scale(-1, 1)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+
+  ctx.translate(canvas.width / 2, canvas.height / 2)
+  ctx.rotate(180 * Math.PI / 180)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.scale(-1, 1)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+
+  ctx.translate(canvas.width / 2 - sw / 8, canvas.height / 2 - dh)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.scale(1, -1)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+}

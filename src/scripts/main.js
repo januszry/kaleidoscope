@@ -14,15 +14,16 @@ const title = document.getElementById('title')
 const world = document.querySelector('#playground .world')
 const mirroredWorld = document.querySelector('#playground .mirrored-world')
 
-const canvas = world.querySelector('canvas')
-const mirrorCanvas = mirroredWorld.querySelector('canvas')
-const mirrorContext = mirrorCanvas.getContext('2d')
-
 function prepare() {
   visualize.init()
   store.status = 'PREPARING'
   world.style.backgroundImage = `url(${imageURL})`
   document.body.style.backgroundColor = '#EDECEC'
+
+  world.style.display = 'block'
+  mirroredWorld.style.display = 'none'
+  const mirrorCanvas = mirroredWorld.querySelector('canvas')
+  const mirrorContext = mirrorCanvas.getContext('2d')
   mirrorContext.clearRect(0, 0, mirrorCanvas.width, mirrorCanvas.height)
   for (const e of [crepe, playButton, redoButton, title]) {
     if (!e) {
@@ -35,7 +36,7 @@ function prepare() {
 function play() {
   if (store.status === 'PREPARING') {
     store.status = 'PLAYING'
-    console.log(visualize.closeContainer())
+    visualize.closeContainer()
     visualize.zoomOut()
   }
   for (const e of [crepe, playButton, redoButton, title]) {
@@ -46,8 +47,9 @@ function play() {
   }
   world.style.backgroundImage = 'none'
   document.body.style.backgroundColor = '#404040'
-
-  mirrorContext.drawImage(canvas, visualize.axes.sx, visualize.axes.sy, 400, 400)
+  world.style.display = 'none'
+  mirroredWorld.style.display = 'block'
+  visualize.generate()
 }
 
 prepare()
