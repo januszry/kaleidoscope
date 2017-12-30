@@ -2,8 +2,6 @@ import * as audio from './audio'
 import * as visualize from './visualize'
 import * as store from './store'
 
-import imageURL from '../assets/glow-small.png'
-
 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
   .then(audio.analyse)
 
@@ -20,7 +18,6 @@ function prepare() {
 
   visualize.init()
 
-  world.style.backgroundImage = `url(${imageURL})`
   wrapper.classList.remove('playing')
 
   const mirrorCanvas = mirroredWorld.querySelector('canvas')
@@ -37,7 +34,6 @@ function play() {
   visualize.closeContainer()
   visualize.zoomOut()
 
-  world.style.backgroundImage = 'none'
   wrapper.classList.add('playing')
 
   visualize.generateKaleidoscope()

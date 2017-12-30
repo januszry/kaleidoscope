@@ -104,15 +104,8 @@ const gemFactories = [
       fillStyle: color,
     },
   }),
-  // pentagon
-  (dropPoint, size, color) => Matter.Bodies.polygon(dropPoint, 0, 5, size, {
-    render: {
-      fillStyle: color,
-    },
-  }),
-  // rectangle
-  (dropPoint, size, color) => Matter.Bodies.rectangle(dropPoint, 0, size, size / 2, {
-    chamfer: { radius: 3 },
+  // octagon
+  (dropPoint, size, color) => Matter.Bodies.polygon(dropPoint, 0, 8, size, {
     render: {
       fillStyle: color,
     },

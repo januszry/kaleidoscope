@@ -41,6 +41,7 @@ $canvas-height: 800px;
   background-size: $canvas-width;
   background-position: center;
   .world {
+    background-image: url('../assets/glow-small.png');
     width: $canvas-width;
     height: $canvas-height;
   }
@@ -76,14 +77,15 @@ $canvas-height: 800px;
     display: inline-block;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0 20px;
+    width: 91px;
+    height: 50px;
+    background-size: 91px 50px;
+    background-position: center;
+    background-repeat: no-repeat;
     .button-overlay {
-      width: 100px;
+      width: 100%;
+      height: 100%;
       border-radius: 4px;
-      text-align: center;
-      line-height: 7px;
-      padding: 25px 0;
-      box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
       color: #404040;
       &:hover {
         background-color: rgba(0,0,0,0.2);
@@ -91,10 +93,10 @@ $canvas-height: 800px;
     }
   }
   .play-button {
-    background-color: #E4583E;
+    background-image: url('../assets/button-play.png');
   }
   .redo-button {
-    background-color: #EDECEC;
+    background-image: url('../assets/button-redo.png');
     display: none;
   }
 }
