@@ -90,34 +90,61 @@ export function zoomOut() {
   ctx.scale(0.3, 0.3)
 }
 
+
+const dstCanvas = document.querySelector('#playground .mirrored-world canvas')
+const dstContext = dstCanvas.getContext('2d')
+
+function _generate(srcCanvas, sw, sh, dw, dh, ox, oy) {
+  const canvas = dstCanvas
+  const ctx = dstContext
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+  ctx.translate(canvas.width / 2, canvas.height / 2)
+  ctx.translate(ox, oy)
+
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+
+  ctx.scale(-1, 1)
+  ctx.rotate(60 * Math.PI / 180)
+
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
+  ctx.rotate(120 * Math.PI / 180)
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+}
+
 export function generate() {
   const sw = axes.l
   const sh = axes.l / 2 * Math.sqrt(3)
-  const dw = sw / 4
-  const dh = sh / 4
+  const dw = sw / 5
+  const dh = sh / 5
   const srcCanvas = world.querySelector('canvas')
-  const canvas = document.querySelector('#playground .mirrored-world canvas')
-  const ctx = canvas.getContext('2d')
-
-  ctx.translate(canvas.width / 2, canvas.height / 2)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-  ctx.scale(-1, 1)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-
-  ctx.setTransform(1, 0, 0, 1, 0, 0)
-
-  ctx.translate(canvas.width / 2, canvas.height / 2)
-  ctx.rotate(180 * Math.PI / 180)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-  ctx.scale(-1, 1)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-
-  ctx.setTransform(1, 0, 0, 1, 0, 0)
-
-  ctx.translate(canvas.width / 2 - sw / 8, canvas.height / 2 - dh)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-  ctx.scale(1, -1)
-  ctx.drawImage(srcCanvas, axes.sx, axes.sy, sw, sh, 0, 0, dw, dh)
-
-  ctx.setTransform(1, 0, 0, 1, 0, 0)
+  _generate(srcCanvas, sw, sh, dw, dh, 0, 0)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, 0)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * -3, 0)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh)
+  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, 0, -dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 3, -dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 3, dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 3, -dh * 2)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, dh * 3)
+  _generate(srcCanvas, sw, sh, dw, dh, -dw * 1.5, -dh * 3)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, dh * 3)
+  _generate(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh * 3)
+  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * 4)
+  _generate(srcCanvas, sw, sh, dw, dh, 0, dh * -4)
 }
