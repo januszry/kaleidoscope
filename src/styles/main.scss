@@ -9,6 +9,28 @@ $canvas-height: 800px;
 
 #wrapper {
   height: 100vh;
+  background-color: #EDECEC;
+  &.playing {
+    background-color: #404040;
+    #title {
+      color: white;
+    }
+    #crepe {
+      display: none;
+    }
+    .play-button {
+      display: none;
+    }
+    .redo-button {
+      display: inline-block;
+    }
+    .world {
+      display: none;
+    }
+    .mirrored-world {
+      display: block;
+    }
+  }
 }
 
 #playground {
@@ -22,7 +44,7 @@ $canvas-height: 800px;
     width: $canvas-width;
     height: $canvas-height;
   }
-  .mirrored-canvas {
+  .mirrored-world .mirrored-canvas {
     width: $canvas-width;
     height: $canvas-height;
   }
@@ -33,9 +55,6 @@ $canvas-height: 800px;
   position: absolute;
   top: 50px;
   left: 50px;
-  &.playing {
-    color: white;
-  }
 }
 
 #crepe {
@@ -46,9 +65,6 @@ $canvas-height: 800px;
   left: 80px;
   img {
     width: 100%;
-  }
-  &.playing {
-    display: none;
   }
 }
 
@@ -76,15 +92,9 @@ $canvas-height: 800px;
   }
   .play-button {
     background-color: #E4583E;
-    &.playing {
-      display: none;
-    }
   }
   .redo-button {
     background-color: #EDECEC;
     display: none;
-    &.playing {
-      display: inline-block;
-    }
   }
 }
