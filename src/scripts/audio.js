@@ -24,28 +24,26 @@ export function analyse(stream) {
   analyser.fftSize = 32
 
   // TODO: assumed sample rate to 44100
-  const frequencyDataArray = new Uint8Array(analyser.frequencyBinCount)  // 44100 / 32 * 3 ~= 4k
-  const timeDomainDataArray = new Uint8Array(analyser.frequencyBinCount)
+  const f = new Uint8Array(analyser.frequencyBinCount)  // 44100 / 32 * 3 ~= 4k
+  const t = new Uint8Array(analyser.frequencyBinCount)
 
   function fetch() {
     // Schedule next redraw
     requestAnimationFrame(fetch)
     // Get spectrum data
-    analyser.getByteFrequencyData(frequencyDataArray)
-    analyser.getByteTimeDomainData(timeDomainDataArray)
+    analyser.getByteFrequencyData(f)
+    analyser.getByteTimeDomainData(t)
 
-    if (sum(frequencyDataArray) > 0) {
-      const vol = Math.max(...timeDomainDataArray)
+    if (sum(f) > 0) {
+      const vol = Math.max(...t)
       const size = (vol - 50) / 8
       if (size < 0) {
         return
       }
-      const r = toHex(frequencyDataArray[0])
-      const g = toHex(frequencyDataArray[1])
-      const b = toHex(frequencyDataArray[2])
-      const a = toHex(Math.floor(Math.random() * 256))
-      console.log(`#${r}${g}${b}`, size)
-      dropGem(`#${r}${g}${b}${a}`, size)
+      const hsl = 360 * (f[0] / 256 / 256 + f[1] / 256)
+      const a = Math.random()
+      console.log(hsl, size)
+      dropGem(`hsla(${hsl}, 100%, 50%, ${a})`, size)
     }
   }
   fetch()
