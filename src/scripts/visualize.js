@@ -58,6 +58,15 @@ export function init() {
   Matter.Render.run(render)
 
   Matter.World.add(engine.world, [wallL, wallR])
+
+  // create mouse constraints
+  const mouse = Matter.Mouse.create(render.canvas)
+  const mouseConstraint = Matter.MouseConstraint.create(engine, {
+    mouse,
+    constraint: { stiffness: 0.2, render: { visible: false } }
+  })
+  Matter.World.add(engine.world, mouseConstraint)
+  render.mouse = mouse
 }
 init()
 
