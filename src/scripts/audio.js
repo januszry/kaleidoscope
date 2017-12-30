@@ -34,7 +34,6 @@ export function analyse(stream) {
     analyser.getByteFrequencyData(frequencyDataArray)
     analyser.getByteTimeDomainData(timeDomainDataArray)
 
-    analyser.getByteTimeDomainData
     if (sum(frequencyDataArray) > 0) {
       const vol = Math.max(...timeDomainDataArray)
       const size = (vol - 50) / 8
@@ -44,8 +43,9 @@ export function analyse(stream) {
       const r = toHex(frequencyDataArray[0])
       const g = toHex(frequencyDataArray[1])
       const b = toHex(frequencyDataArray[2])
+      const a = toHex(Math.floor(Math.random() * 256))
       console.log(`#${r}${g}${b}`, size)
-      dropGem(`#${r}${g}${b}`, size)
+      dropGem(`#${r}${g}${b}${a}`, size)
     }
   }
   fetch()
