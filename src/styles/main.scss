@@ -1,5 +1,4 @@
 body {
-  background: #EDECEC;
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
@@ -20,26 +19,32 @@ body {
 
 #title {
   color: #404040;
-  position: fixed;
+  position: absolute;
   top: 50px;
   left: 50px;
+  &.playing {
+    color: white;
+  }
 }
 
 #crepe {
   width: 100px;
   height: 125px;
-  position: fixed;
+  position: absolute;
   top: 600px;
   left: 80px;
   img {
     width: 100%;
   }
+  &.playing {
+    display: none;
+  }
 }
 
 #buttons {
-  position: fixed;
+  position: absolute;
   top: 640px;
-  right: 100px;
+  right: 80px;
   .control-buttons {
     display: inline-block;
     border-radius: 4px;
@@ -60,9 +65,15 @@ body {
   }
   .play-button {
     background-color: #E4583E;
+    &.playing {
+      display: none;
+    }
   }
   .redo-button {
     background-color: #EDECEC;
     display: none;
+    &.playing {
+      display: inline-block;
+    }
   }
 }

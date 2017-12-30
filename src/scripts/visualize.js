@@ -1,10 +1,6 @@
 import * as Matter from 'matter-js'
 
-import imageURL from '../assets/glow-small.png'
-
-const playground = document.getElementById('playground')
-const world = playground.querySelector('.world')
-world.style.backgroundImage = `url(${imageURL})`
+const world = document.querySelector('#playground .world')
 
 // create an engine
 const engine = Matter.Engine.create()
@@ -29,17 +25,23 @@ export function init() {
     },
   })
 
-  const wallL = Matter.Bodies.rectangle(300, 500, 400, 5, {
+  const wallL = Matter.Bodies.rectangle(300, 450, 400, 5, {
     isStatic: true,
     angle: Math.PI / 3,
     chamfer: { radius: 3 },
     friction: 1,
+    render: {
+      fillStyle: 'white',
+    }
   })
-  const wallR = Matter.Bodies.rectangle(500, 500, 400, 5, {
+  const wallR = Matter.Bodies.rectangle(500, 450, 400, 5, {
     isStatic: true,
     angle: Math.PI * 2 / 3,
     chamfer: { radius: 3 },
     friction: 1,
+    render: {
+      fillStyle: 'white',
+    }
   })
 
   // run the engine
@@ -50,6 +52,18 @@ export function init() {
   Matter.World.add(engine.world, [wallL, wallR])
 }
 init()
+
+export function closeContainer() {
+  const wallU = Matter.Bodies.rectangle(400, 280, 400, 5, {
+    isStatic: true,
+    chamfer: { radius: 3 },
+    friction: 1,
+    render: {
+      fillStyle: 'white',
+    }
+  })
+  Matter.World.add(engine.world, [wallU])
+}
 
 export function dropGem(color, size) {
   const dropPoint = Math.random() * 250 + 275

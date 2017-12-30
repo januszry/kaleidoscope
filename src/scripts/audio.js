@@ -42,7 +42,7 @@ export function analyse(stream) {
         return
       }
       const hsl = 360 * (f[0] / 256 / 256 + f[1] / 256)
-      const a = Math.random()
+      const a = Math.random() * 0.3 + 0.5
       console.log(hsl, size)
       dropGem(`hsla(${hsl}, 100%, 50%, ${a})`, size)
     }
