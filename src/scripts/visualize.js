@@ -1,14 +1,17 @@
 import * as Matter from 'matter-js'
 
-const canvas = document.getElementById('playground-canvas')
+import imageURL from '../assets/glow-small.png'
+
+const world = document.querySelector('#playground .world')
+world.style.backgroundImage = `url(${imageURL})`
 
 // create an engine
-export const engine = Matter.Engine.create()
+const engine = Matter.Engine.create()
 
-export function init() {
+function init() {
   // create a renderer
   const render = Matter.Render.create({
-    element: canvas,
+    element: world,
     engine: engine,
     options: {
       wireframes: false,
@@ -38,6 +41,7 @@ export function init() {
 
   Matter.World.add(engine.world, [wallL, wallR])
 }
+init()
 
 export function dropGem(color, size) {
   const dropPoint = Math.random() * 250 + 275
