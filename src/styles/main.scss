@@ -4,16 +4,23 @@ body {
   color: #333;
 }
 
+$canvas-width: 800px;
+$canvas-height: 800px;
+
 #playground {
-  width: 800px;
-  height: 800px;
+  width: $canvas-width;
+  height: $canvas-height;
   margin-left: auto;
   margin-right: auto;
-  background-size: 800px;
+  background-size: $canvas-width;
   background-position: center;
   .world {
-    width: 100%;
-    height: 100%;
+    width: $canvas-width;
+    height: $canvas-height;
+  }
+  .mirrored-canvas {
+    width: $canvas-width;
+    height: $canvas-height;
   }
 }
 
