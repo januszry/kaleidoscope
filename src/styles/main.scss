@@ -136,6 +136,18 @@ $canvas-height: 800px;
   height: 35px;
 }
 
+#bubble {
+  position: absolute;
+  bottom: 180px;
+  left: 120px;
+  width: 100px;
+  height: 100px;
+  background-image: url('../assets/bubble.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 #mask {
   position: absolute;
   width: 100%;
