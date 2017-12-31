@@ -33,6 +33,12 @@ $canvas-height: 800px;
     #mask {
       display: block;
     }
+    #joystick-head {
+      display: block;
+    }
+    #joystick-base {
+      display: block;
+    }
   }
   &.ready {
     .play-button {
@@ -91,8 +97,8 @@ $canvas-height: 800px;
 }
 
 #crepe {
-  width: 100px;
-  height: 125px;
+  width: 80px;
+  height: 100px;
   position: absolute;
   bottom: 100px;
   left: 80px;
@@ -101,13 +107,34 @@ $canvas-height: 800px;
   }
 }
 
+#joystick-head {
+  position: absolute;
+  bottom: 126px;
+  left: 79px;
+  display: none;
+  z-index: 5;
+  width: 82px;
+  height: 78px;
+  transform-origin: bottom;
+}
+
+#joystick-base {
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  display: none;
+  z-index: 4;
+  width: 40px;
+  height: 35px;
+}
+
 #mask {
   position: absolute;
   width: 100%;
   height: 800px;
   top: 0;
   background-image: url('../assets/mask.png');
-  background-size: 1000px;
+  background-size: 1200px;
   background-repeat: no-repeat;
   background-position: center;
   display: none;

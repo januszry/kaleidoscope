@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "babel-preset-env": "1.6.1",
-    "matter-js": "0.14.0"
+    "matter-js": "0.14.0",
+    "nipplejs": "0.6.8"
   },
   "eslintConfig": {
     "env": {
