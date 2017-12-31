@@ -1,5 +1,7 @@
 import * as nipplejs from 'nipplejs'
 
+import * as visualize from './visualize'
+
 export function initJoystick() {
   const joystickZone = document.getElementById('joystick-head')
   const joystickRadius = 50
@@ -26,4 +28,12 @@ export function initJoystick() {
       mask.style.marginLeft = 0
       mask.style.marginTop = 0
     })
+}
+
+export function initKnob() {
+  const lKnob = document.querySelector('#knob .l-knob')
+  const rKnob = document.querySelector('#knob .r-knob')
+  lKnob.onclick = () => {
+    visualize.rotateWorld(60)
+  }
 }

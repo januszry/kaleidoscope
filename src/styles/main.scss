@@ -29,6 +29,9 @@ $canvas-height: 800px;
     }
     .mirrored-world {
       display: block;
+      .mirrored-canvas {
+        display: inherit;
+      }
     }
     #mask {
       display: block;
@@ -76,6 +79,7 @@ $canvas-height: 800px;
     height: $canvas-height;
   }
   .mirrored-world .mirrored-canvas {
+    display: none;
     width: $canvas-width;
     height: $canvas-height;
   }

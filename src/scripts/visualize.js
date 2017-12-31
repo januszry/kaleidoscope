@@ -197,3 +197,6 @@ export function generateKaleidoscope() {
   _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * 4)
   _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * -4)
 }
+
+export function rotateWorld(angle) {
+}
