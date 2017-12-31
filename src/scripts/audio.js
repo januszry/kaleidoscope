@@ -29,7 +29,7 @@ export function analyse(stream) {
   const t = new Uint8Array(analyser.frequencyBinCount)
 
   function fetch() {
-    if (!status.isPreparing()) {
+    if (status.isPlaying()) {
       audioCtx.close()
       return
     }

@@ -13,10 +13,6 @@ const mirroredWorld = document.querySelector('#playground .mirrored-world')
 const mirrorCanvas = mirroredWorld.querySelector('canvas')
 const mirrorContext = mirrorCanvas.getContext('2d')
 
-export function incrGem() {
-  ++gemCount > 20 && setStatusToReady()
-}
-
 export function isPreparing() {
   return currentStatus === statusMap.PREPARING
 }
@@ -29,6 +25,10 @@ export function isPlaying() {
   return currentStatus === statusMap.PLAYING
 }
 
+export function incrGem() {
+  ++gemCount > 20 && !isReady() && setStatusToReady()
+}
+
 export function setStatusToPreparing() {
   currentStatus = statusMap.PREPARING
   gemCount = 0
@@ -38,13 +38,13 @@ export function setStatusToPreparing() {
 }
 
 export function setStatusToPlaying() {
-  currentStatus = status.PLAYING
+  currentStatus = statusMap.PLAYING
   wrapper.classList.remove('ready')
   wrapper.classList.add('playing')
 }
 
 export function setStatusToReady() {
-  currentStatus = status.READY
+  currentStatus = statusMap.READY
   wrapper.classList.remove('playing')
   wrapper.classList.add('ready')
 }
