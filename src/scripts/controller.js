@@ -34,6 +34,9 @@ export function initKnob() {
   const lKnob = document.querySelector('#knob .l-knob')
   const rKnob = document.querySelector('#knob .r-knob')
   lKnob.onclick = () => {
-    visualize.rotateWorld(60)
+    visualize.rotateGravity(2)
+  }
+  rKnob.onclick = () => {
+    visualize.rotateGravity(-2)
   }
 }
