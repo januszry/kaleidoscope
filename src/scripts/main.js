@@ -24,3 +24,4 @@ playButton.onclick = play
 redoButton.onclick = prepare
 
 controller.initJoystick()
+controller.initKnob()

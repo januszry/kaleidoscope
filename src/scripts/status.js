@@ -1,3 +1,5 @@
+import * as visualize from './visualize'
+
 const statusMap = {
   PREPARING: 'PREPARING',
   READY: 'READY',
@@ -9,9 +11,6 @@ let currentStatus = 'PREPARING'
 let gemCount = 0
 
 const wrapper = document.getElementById('wrapper')
-const mirroredWorld = document.querySelector('#playground .mirrored-world')
-const mirrorCanvas = mirroredWorld.querySelector('canvas')
-const mirrorContext = mirrorCanvas.getContext('2d')
 
 export function isPreparing() {
   return currentStatus === statusMap.PREPARING
@@ -34,7 +33,7 @@ export function setStatusToPreparing() {
   gemCount = 0
   wrapper.classList.remove('playing')
   wrapper.classList.remove('ready')
-  mirrorContext.clearRect(0, 0, mirrorCanvas.width, mirrorCanvas.height)
+  visualize.clearMirrorCanvas()
 }
 
 export function setStatusToPlaying() {

@@ -1,6 +1,8 @@
 import * as Matter from 'matter-js'
 
 const world = document.querySelector('#playground .world')
+const mirrorCanvas = document.querySelector('#playground .mirrored-world canvas')
+const mirrorContext = mirrorCanvas.getContext('2d')
 
 // create an engine
 const engine = Matter.Engine.create()
@@ -70,6 +72,7 @@ export function init() {
   })
   Matter.World.add(engine.world, mouseConstraint)
   render.mouse = mouse
+  resetGravity()
 }
 
 export function closeContainer() {
@@ -122,9 +125,6 @@ export function dropGem(color, size) {
   return Matter.World.add(engine.world, [gem])
 }
 
-const dstCanvas = document.querySelector('#playground .mirrored-world canvas')
-const dstContext = dstCanvas.getContext('2d')
-
 function _drawWhiteBackground(ctx, dw, dh) {
   ctx.beginPath()
   ctx.lineTo(dw / 2, dh)
@@ -138,8 +138,8 @@ function _drawWhiteBackground(ctx, dw, dh) {
 }
 
 function _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, ox, oy) {
-  const canvas = dstCanvas
-  const ctx = dstContext
+  const canvas = mirrorCanvas
+  const ctx = mirrorContext
 
   ctx.setTransform(1, 0, 0, 1, 0, 0)
   ctx.translate(canvas.width / 2, canvas.height / 2)
@@ -196,4 +196,44 @@ export function generateKaleidoscope() {
   _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, dw * 1.5, -dh * 3)
   _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * 4)
   _generateKaleidoscope(srcCanvas, sw, sh, dw, dh, 0, dh * -4)
+}
+
+export function clearMirrorCanvas() {
+  mirrorContext.clearRect(0, 0, mirrorCanvas.width, mirrorCanvas.height)
+}
+
+const gravities = [
+  [0, 1],
+  [0.5 * Math.sqrt(3), 0.5],
+  [0.5 * Math.sqrt(3), -0.5],
+  [1, 0],
+  [-0.5 * Math.sqrt(3), -0.5],
+  [-0.5 * Math.sqrt(3), 0.5],
+]
+
+let currentGravityIndex = 0
+
+export function rotateGravity(incr) {
+  currentGravityIndex = (currentGravityIndex + incr + gravities.length) % gravities.length
+  const nextGravity = gravities[currentGravityIndex]
+  engine.world.gravity.x = nextGravity[0]
+  engine.world.gravity.y = nextGravity[1]
+
+  const interval = 500
+  let times = 3
+
+  let loop = setInterval(() => {
+    clearMirrorCanvas()
+    generateKaleidoscope()
+    if (--times === 0) {
+      clearInterval(loop)
+    }
+  }, 500)
+}
+
+export function resetGravity() {
+  currentGravityIndex = 0
+  const nextGravity = gravities[currentGravityIndex]
+  engine.world.gravity.x = nextGravity[0]
+  engine.world.gravity.y = nextGravity[1]
 }
