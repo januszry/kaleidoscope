@@ -10,8 +10,16 @@ function toHex(i, padding = 2) {
   return hex
 }
 
-function sum(arr) {
-  return arr.reduce((a, b) => a + b, 0)
+function findMax(arr, topIndex) {
+  let maxIndex = 0
+  let maxValue = 0
+  for (let i = 0; i < Math.min(arr.length, topIndex); i++) {
+    if (arr[i] > maxValue) {
+      maxIndex = i
+      maxValue = arr[i]
+    }
+  }
+  return { maxIndex, maxValue }
 }
 
 export function analyse(stream) {
@@ -22,34 +30,27 @@ export function analyse(stream) {
 
   analyser.minDecibels = -50
   analyser.maxDecibels = -10
-  analyser.fftSize = 32
+  analyser.fftSize = 2048
 
   // TODO: assumed sample rate to 44100
-  const f = new Uint8Array(analyser.frequencyBinCount)  // 44100 / 32 * 3 ~= 4k
-  const t = new Uint8Array(analyser.frequencyBinCount)
+  const f = new Uint8Array(analyser.frequencyBinCount)  // 44100 / 2048 * 180 ~= 4k
 
   function fetch() {
     if (status.isPlaying()) {
       audioCtx.close()
       return
     }
-
     // Schedule next redraw
     requestAnimationFrame(fetch)
+
     // Get spectrum data
     analyser.getByteFrequencyData(f)
-    analyser.getByteTimeDomainData(t)
-
-    if (sum(f) > 0) {
-      const vol = Math.max(...t)
-      const size = (vol - 50) / 3.5
-      if (size < 0) {
-        return
-      }
-      const hsl = 360 * (f[0] / 256 / 256 + f[1] / 256 + f[2])
+    const { maxIndex, maxValue } = findMax(f, 180)
+    if (maxValue > 10) {
+      const size = maxValue / 5 + 10
+      console.log(maxIndex, maxValue)
       const a = Math.random() * 0.3 + 0.5
-      dropGem(`hsla(${hsl}, 100%, 50%, ${a})`, size)
-
+      dropGem(`hsla(${maxIndex * 2}, 100%, 50%, ${a}`, size)
       status.incrGem()
     }
   }
