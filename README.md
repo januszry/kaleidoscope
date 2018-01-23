@@ -1,5 +1,8 @@
 # kaleidoscope
 
+## Demo
+https://januszry.github.io/
+
 ## Build
 
 > Install parcel.js first
