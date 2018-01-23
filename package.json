@@ -1,6 +1,6 @@
 {
   "name": "kaleidoscope",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "",
   "main": "index.js",
   "s3_bucket": "kaleidoscope-sim",
