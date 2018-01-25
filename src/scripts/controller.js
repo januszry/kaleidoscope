@@ -1,4 +1,5 @@
 import * as nipplejs from 'nipplejs'
+import tippy from 'tippy.js'
 
 import * as visualize from './visualize'
 import touchedHeadURL from '../assets/joystick-head-touched.png'
@@ -45,4 +46,12 @@ export function initKnob() {
   rKnob.onclick = () => {
     visualize.rotateGravity(-2)
   }
+}
+
+export function initTip() {
+  const tip = document.getElementById('tip')
+  tippy(tip, {
+    trigger: 'manual',
+  })
+  tip._tippy.show()
 }

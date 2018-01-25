@@ -25,3 +25,4 @@ redoButton.onclick = prepare
 
 controller.initJoystick()
 controller.initKnob()
+controller.initTip()

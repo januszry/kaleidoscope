@@ -28,7 +28,8 @@
   "dependencies": {
     "babel-preset-env": "1.6.1",
     "matter-js": "0.14.0",
-    "nipplejs": "0.6.8"
+    "nipplejs": "0.6.8",
+    "tippy.js": "2.0.9"
   },
   "eslintConfig": {
     "env": {
