@@ -28,6 +28,10 @@ export function incrGem() {
   ++gemCount > 20 && !isReady() && setStatusToReady()
 }
 
+export function isGemOverFilled() {
+  return gemCount > 40
+}
+
 export function setStatusToPreparing() {
   currentStatus = statusMap.PREPARING
   gemCount = 0
