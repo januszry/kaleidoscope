@@ -215,3 +215,22 @@ $canvas-height: 800px;
     background-image: url('../assets/turn-right.png');
   }
 }
+
+#tip {
+  position: absolute;
+  bottom: 100px;
+  left: 80px;
+  width: 80px;
+  height: 100px;
+}
+
+.tippy-tooltip.white-theme {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  user-select: none;
+  padding: 20px;
+}
+.tippy-popper[x-placement^=top] .tippy-tooltip.white-theme .tippy-arrow {
+  border-top: 7px solid white;
+}
