@@ -22,7 +22,7 @@ function findMax(arr, topIndex) {
   return { maxIndex, maxValue }
 }
 
-export function analyse(stream) {
+function analyse(stream) {
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
   const analyser = audioCtx.createAnalyser()
   const source = audioCtx.createMediaStreamSource(stream)
@@ -54,4 +54,8 @@ export function analyse(stream) {
     }
   }
   fetch()
+}
+
+export function init() {
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(analyse)
 }

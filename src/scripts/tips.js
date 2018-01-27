@@ -1,5 +1,7 @@
 import tippy from 'tippy.js'
+
 import * as status from './status'
+import * as audio from './audio'
 
 const state = {
   phase: null,
@@ -8,13 +10,14 @@ const state = {
 
 let nextSwitchTimeout
 let bubble
+let shouldDisplayTips = false
 
 const tipContents = {
   intro: [
     'Welcome to Kaleidoscope!',
     'I\'m Ms. Crepe. 💗',
     'Here you can use your voice to create colorful gems like 🔵🔻🔶',
-    'Got it!',
+    'Got it? Click here to continue!',
   ],
   guide: [
     'Try to make a sound 🎵',
@@ -64,12 +67,14 @@ function setAsVeteran() {
   localStorage.setItem('is_veteran', 'true')
 }
 
-function clearState() {
+function clearVeteran() {
   localStorage.removeItem('is_veteran')
 }
 
 function doSwitch(nextState) {
+  tip._tippy.hide()
   tip.setAttribute('title', tipContents[nextState.phase][nextState.index])
+  tip._tippy.show()
   state.phase = nextState.phase
   state.index = nextState.index
 }
@@ -87,8 +92,7 @@ function switchToNextState(clicked) {
       phase: 'overfilledHints',
       index: 0,
     }
-  } else if (length > state.index + 1) {
-    // TODO check enough
+  } else if (state.phase !== 'hints' && state.index < length - 1) {
     nextState = {
       phase: state.phase,
       index: state.index + 1,
@@ -99,15 +103,18 @@ function switchToNextState(clicked) {
       index: 0,
     }
     setAsVeteran()
+    audio.init()
   } else if (state.phase === 'guide') {
-    nextState = {
-      phase: 'hints',
-      index: 0,
-    }
-  } else if (state.phase === 'hints') {
-    nextState = {
-      phase: 'hints',
-      index: 0,
+    if (shouldDisplayTips) {
+      nextState = {
+        phase: 'hints',
+        index: Math.floor(Math.random() * tipContents.hints.length),
+      }
+    } else {
+      nextState = {
+        phase: 'guide',
+        index: 0,
+      }
     }
   } else if (state.phase === 'playing') {
     nextState = {
@@ -164,7 +171,9 @@ export function init() {
   if (!isVeteran()) {
     nextState.phase = 'intro'
   } else {
+    audio.init()
     nextState.phase = 'guide'
+    shouldDisplayTips = true
   }
   doSwitch(nextState)
   tip._tippy.show()
