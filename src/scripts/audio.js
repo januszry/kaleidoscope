@@ -28,7 +28,7 @@ export function analyse(stream) {
   const source = audioCtx.createMediaStreamSource(stream)
   source.connect(analyser)
 
-  analyser.minDecibels = -50
+  analyser.minDecibels = -45
   analyser.maxDecibels = -10
   analyser.fftSize = 2048
 

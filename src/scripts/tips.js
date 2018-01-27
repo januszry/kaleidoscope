@@ -50,7 +50,7 @@ function clearSwitch() {
 }
 
 function scheduleNextSwitch() {
-  const timeout = Math.random() * 1000 + 2000
+  const timeout = Math.random() * 1000 + 2500
   nextSwitchTimeout = setTimeout(switchToNextState, timeout)
 }
 
