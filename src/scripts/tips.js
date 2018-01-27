@@ -31,6 +31,27 @@ const tipContents = {
   overfilledHints: [
     'Too many!!!😱',
   ],
+  playing: [
+    'Shake my head and see what you will get!',
+    'Click rotate buttons to see the magic!',
+  ],
+  touching: [
+    'Be gentle!😵',
+    'Hmmm',
+    'Ohhh',
+  ],
+}
+
+function clearSwitch() {
+  if (nextSwitchTimeout) {
+    clearTimeout(nextSwitchTimeout)
+    nextSwitchTimeout = null
+  }
+}
+
+function scheduleNextSwitch() {
+  const timeout = Math.random() * 1000 + 2000
+  nextSwitchTimeout = setTimeout(switchToNextState, timeout)
 }
 
 const tip = document.getElementById('tip')
@@ -47,7 +68,7 @@ function clearState() {
   localStorage.removeItem('is_veteran')
 }
 
-function showText(nextState) {
+function doSwitch(nextState) {
   tip.setAttribute('title', tipContents[nextState.phase][nextState.index])
   state.phase = nextState.phase
   state.index = nextState.index
@@ -56,12 +77,12 @@ function showText(nextState) {
 function switchToNextState(clicked) {
   const length = tipContents[state.phase].length
   let nextState
-  if ((state.phase === 'guide' || state.phase === 'hints') && status.isReady()) {
+  if ((state.phase === 'guide' || state.phase === 'hints') && !status.isGemOverFilled() && status.isReady()) {
     nextState = {
       phase: 'enoughHints',
       index: 0,
     }
-  } else if (state.phase !== 'overfilledHint' && status.isGemOverFilled()) {
+  } else if ((state.phase === 'guide' || state.phase === 'hints') && status.isGemOverFilled()) {
     nextState = {
       phase: 'overfilledHints',
       index: 0,
@@ -88,18 +109,44 @@ function switchToNextState(clicked) {
       phase: 'hints',
       index: 0,
     }
+  } else if (state.phase === 'playing') {
+    nextState = {
+      phase: 'playing',
+      index: 0,
+    }
+  } else if (state.phase === 'touching') {
+    nextState = {
+      phase: 'touching',
+      index: 0,
+    }
   }
   if (nextState) {
-    showText(nextState)
+    doSwitch(nextState)
   }
-  nextSwitchTimeout = setTimeout(switchToNextState, 2000)
+  scheduleNextSwitch()
+}
+
+export function switchToPlayState() {
+  clearSwitch()
+  setAsVeteran()
+  doSwitch({
+    phase: 'playing',
+    index: 0,
+  })
+  scheduleNextSwitch()
+}
+
+export function switchToTouchState() {
+  clearSwitch()
+  doSwitch({
+    phase: 'touching',
+    index: 0,
+  })
+  scheduleNextSwitch()
 }
 
 export function init() {
-  if (nextSwitchTimeout) {
-    clearTimeout(nextSwitchTimeout)
-    nextSwitchTimeout = null
-  }
+  clearSwitch()
   if (!bubble) {
     tippy(tip, {
       trigger: 'manual',
@@ -119,15 +166,12 @@ export function init() {
   } else {
     nextState.phase = 'guide'
   }
-  showText(nextState)
+  doSwitch(nextState)
   tip._tippy.show()
   bubble = document.querySelector('.tippy-popper')
   bubble.onclick = () => {
-    if (nextSwitchTimeout) {
-      clearTimeout(nextSwitchTimeout)
-      nextSwitchTimeout = null
-    }
+    clearSwitch()
     switchToNextState(true)
   }
-  nextSwitchTimeout = setTimeout(switchToNextState, 3000)
+  scheduleNextSwitch()
 }

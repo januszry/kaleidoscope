@@ -20,6 +20,7 @@ function play() {
   status.setStatusToPlaying()
   visualize.closeContainer()
   visualize.generateKaleidoscope()
+  tips.switchToPlayState()
 }
 
 playButton.onclick = play

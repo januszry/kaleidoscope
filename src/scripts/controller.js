@@ -2,6 +2,7 @@ import * as nipplejs from 'nipplejs'
 
 import * as visualize from './visualize'
 import touchedHeadURL from '../assets/joystick-head-touched.png'
+import * as tips from './tips'
 
 export function initJoystick() {
   const joystickZone = document.getElementById('joystick-head')
@@ -26,6 +27,7 @@ export function initJoystick() {
     })
     .on('start', (evt, data) => {
       joystickZone.src = touchedHeadURL
+      tips.switchToTouchState()
     })
     .on('end', (evt, data) => {
       joystickZone.src = headURL
@@ -33,6 +35,7 @@ export function initJoystick() {
       joystickZone.style.height = `${originHeight}px`
       mask.style.marginLeft = 0
       mask.style.marginTop = 0
+      tips.switchToPlayState()
     })
 }
 
