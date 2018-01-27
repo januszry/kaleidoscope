@@ -12,6 +12,7 @@ function prepare() {
   visualize.init()
   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(audio.analyse)
+  tips.init()
 }
 prepare()
 
@@ -26,5 +27,3 @@ redoButton.onclick = prepare
 
 controller.initJoystick()
 controller.initKnob()
-
-tips.init()

@@ -48,7 +48,6 @@ export function analyse(stream) {
     const { maxIndex, maxValue } = findMax(f, 180)
     if (maxValue > 10) {
       const size = maxValue / 5 + 10
-      console.log(maxIndex, maxValue)
       const a = Math.random() * 0.3 + 0.5
       dropGem(`hsla(${maxIndex * 2}, 100%, 50%, ${a}`, size)
       status.incrGem()
