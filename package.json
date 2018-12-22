@@ -1,6 +1,6 @@
 {
   "name": "kaleidoscope",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "",
   "main": "index.js",
   "s3_bucket": "kaleidoscope-sim",
@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/januszry/kaleidoscope#readme",
   "devDependencies": {
-    "node-sass": "^4.7.2"
+    "node-sass": "^4.11.0"
   },
   "dependencies": {
     "babel-preset-env": "1.6.1",
-    "matter-js": "0.14.0",
+    "matter-js": "0.14.2",
     "nipplejs": "0.6.8",
-    "tippy.js": "2.0.9"
+    "tippy.js": "2.5.3"
   },
   "eslintConfig": {
     "env": {
